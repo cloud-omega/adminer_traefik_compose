@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  adminer:
+    image: adminer
+    container_name: adminer
+    environment:
+      - ADMINER_DEFAULT_SERVER=mysql
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.adminer.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/${APP_PATH}`)"
+      - "traefik.http.routers.adminer.entrypoints=web"
+      - "traefik.http.routers.adminer.middlewares=adminer-stripprefix"
+      - "traefik.http.middlewares.adminer-stripprefix.stripprefix.prefixes=/${APP_PATH}"
+    networks:
+      - proxy_default
+    #ports:     - "8080:8080"
+
+networks:
+  proxy_default:
+    external: true
