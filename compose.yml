@@ -12,6 +12,8 @@ services:
       - "traefik.http.routers.adminer.entrypoints=web"
       - "traefik.http.routers.adminer.middlewares=adminer-stripprefix"
       - "traefik.http.middlewares.adminer-stripprefix.stripprefix.prefixes=/${APP_PATH}"
+      - "traefik.http.services.adminer.loadbalancer.server.port=8080"
+      - "traefik.docker.network=proxy_default
     networks:
       - proxy_default
     #ports:     - "8080:8080"
