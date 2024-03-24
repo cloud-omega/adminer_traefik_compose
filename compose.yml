@@ -8,7 +8,7 @@ services:
       - ADMINER_DEFAULT_SERVER=mysql
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.adminer.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/${APP_PATH}`)"
+      - "traefik.http.routers.adminer.rule=Host(`${DOMAIN_NAME}`) && Path(`/${APP_PATH}`)"
       - "traefik.http.routers.adminer.entrypoints=web"
       - "traefik.http.routers.adminer.middlewares=adminer-stripprefix"
       - "traefik.http.middlewares.adminer-stripprefix.stripprefix.prefixes=/${APP_PATH}"
